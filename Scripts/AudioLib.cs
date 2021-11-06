@@ -29,19 +29,21 @@ public class AudioLib : MonoBehaviour
          * - 2: pistol
         */
 
+        float volume = Mathf.Round(PlayerPrefs.GetInt("SETTINGS_VOLUME")) / 100;
+
         switch (weaponID)
         {
             case 1:
                 switch (state)
                 {
                     case "empty":
-                        RIFLE_EMPTY.PlayOneShot(RIFLE_EMPTY_CLIP);
+                        RIFLE_EMPTY.PlayOneShot(RIFLE_EMPTY_CLIP, volume);
                         break;
                     case "reload":
-                        RIFLE_RELOAD.PlayOneShot(RIFLE_RELOAD_CLIP);
+                        RIFLE_RELOAD.PlayOneShot(RIFLE_RELOAD_CLIP, volume);
                         break;
                     case "shoot":
-                        RIFLE_SHOOT.PlayOneShot(RIFLE_SHOOT_CLIP);
+                        RIFLE_SHOOT.PlayOneShot(RIFLE_SHOOT_CLIP, volume);
                         break;
                 }
                 break;
@@ -49,13 +51,13 @@ public class AudioLib : MonoBehaviour
                 switch (state)
                 {
                     case "empty":
-                        PISTOL_EMPTY.PlayOneShot(PISTOL_EMPTY_CLIP);
+                        PISTOL_EMPTY.PlayOneShot(PISTOL_EMPTY_CLIP, volume);
                         break;
                     case "reload":
-                        PISTOL_RELOAD.PlayOneShot(PISTOL_RELOAD_CLIP);
+                        PISTOL_RELOAD.PlayOneShot(PISTOL_RELOAD_CLIP, volume);
                         break;
                     case "shoot":
-                        PISTOL_SHOOT.PlayOneShot(PISTOL_SHOOT_CLIP);
+                        PISTOL_SHOOT.PlayOneShot(PISTOL_SHOOT_CLIP, volume);
                         break;
                 }
                 break;

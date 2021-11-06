@@ -1,20 +1,23 @@
 using UnityEngine;
+using TMPro;
 
 public class Gun : MonoBehaviour
 {
 
     public Camera _camera;
     public ParticleSystem shootParticle;
-    public GameObject impactEffect;
     public GameObject flashLight;
+    public GameObject bullet;
+    public Transform attackPoint;
+    public TextMeshProUGUI ammoDisplay;
     public float damage = 10F;
-    public float range = 100F;
     public float ammunitionCapacity = 30F;
     public float reloadTime = 1.2F;
     public float shootDelay = 0.3F;
     public float currentAmmo;
-    public float impactEffectTime = 1.5F;
-    public float shootVolume = 1F;
+    public float spread = 1F;
+    public float shootForce;
+    public float bulletLifetime;
     public int ID;
     public bool flashLightEnabled;
 
@@ -36,6 +39,10 @@ public class Gun : MonoBehaviour
         {
 
             currentAmmo -= 1;
+
+            // AMMO DISPLAY
+            ammoDisplay.SetText($"{currentAmmo}/{ammunitionCapacity}");
+
             if (currentAmmo <= 0)
             {
                 currentAmmo = 0;
@@ -47,18 +54,33 @@ public class Gun : MonoBehaviour
 
             shootParticle.Play(); // Schuss Partikel abspielen
             audioLib.PlaySound(ID, "shoot"); // Schuss Sound abspielen
+            Vector3 targetPoint;
+            Ray ray = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hit;
-            if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, range)) // Wird ausgeführt, wenn etwas getroffen wird
+            if (Physics.Raycast(ray, out hit)) // Wird ausgeführt, wenn etwas getroffen wird
             {
                 Damagable damagable = hit.transform.gameObject.GetComponent<Damagable>();
                 if (damagable != null) // Getroffenes objekt hat den component Damageable und ist somit zerstörbar
                 {
                     damagable.DealDamage(damage);
                 }
-
-                GameObject impactEffectObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(impactEffectObj, impactEffectTime);
+                targetPoint = hit.point;
+            } else // Wird ausgeführt, wenn nichts getroffen wurde
+            {
+                targetPoint = ray.GetPoint(75);
             }
+
+            // BULLET
+            Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+            float x = Random.Range(-spread, spread);
+            float y = Random.Range(-spread, spread);
+            Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
+            GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+            currentBullet.gameObject.SetActive(true);
+            currentBullet.transform.forward = directionWithSpread.normalized;
+            currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+            Destroy(currentBullet, bulletLifetime);
+
             inShootDelay = true;
             Invoke("ClearShootDelay", shootDelay);
         }
@@ -96,13 +118,12 @@ public class Gun : MonoBehaviour
     {
         inFlashlightDelay = false;
     }
-
     private void ClearReload()
     {
         reloading = false;
         currentAmmo = ammunitionCapacity;
+        ammoDisplay.SetText($"{currentAmmo}/{ammunitionCapacity}");
     }
-
     private void ClearShootDelay()
     {
         inShootDelay = false;

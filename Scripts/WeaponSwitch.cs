@@ -6,7 +6,6 @@ public class WeaponSwitch : MonoBehaviour
 
     public GameObject rifle;
     public GameObject pistol;
-    public Text ammoDisplay;
     public Transform weaponContainer;
     public float switchCooldown = 0.5F;
 
@@ -20,12 +19,6 @@ public class WeaponSwitch : MonoBehaviour
         currentWeapon = rifle; // Die Rifle ist am Anfang ausgerüstet
         currentWeaponObj = currentWeapon.GetComponent<Gun>();
         inSwitchCooldown = false;
-
-    }
-
-    private void Update()
-    {
-        UpdateAmmoDisplay();
     }
 
     public void SwitchWeapon()
@@ -45,6 +38,7 @@ public class WeaponSwitch : MonoBehaviour
                 currentWeapon = rifle;
             }
             currentWeaponObj = currentWeapon.GetComponent<Gun>();
+            currentWeaponObj.ammoDisplay.SetText($"{currentWeaponObj.currentAmmo}/{currentWeaponObj.ammunitionCapacity}");
             inSwitchCooldown = true;
             Invoke("RemoveCooldown", switchCooldown);
         }
@@ -53,11 +47,6 @@ public class WeaponSwitch : MonoBehaviour
     private void RemoveCooldown()
     {
         inSwitchCooldown = false;
-    }
-
-    private void UpdateAmmoDisplay()
-    {
-        ammoDisplay.text = currentWeaponObj.currentAmmo.ToString();
     }
 
 }
