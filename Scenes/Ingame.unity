@@ -456,6 +456,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6559363461447691590, guid: 1d6f6319a31169849880544ae764d9ce,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6f6319a31169849880544ae764d9ce, type: 3}
 --- !u!4 &173801728 stripped
@@ -498,6 +503,25 @@ MonoBehaviour:
   bulletLifetime: 2
   ID: 1
   flashLightEnabled: 0
+--- !u!95 &173801731
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173801729}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf36026ab5bcfa64680798771e6308d6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &277104763
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +959,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 006e7eb2178356a4898095a27d559227,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 006e7eb2178356a4898095a27d559227,
         type: 3}
@@ -982,6 +1006,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2898394801674235841, guid: 006e7eb2178356a4898095a27d559227,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 006e7eb2178356a4898095a27d559227, type: 3}
 --- !u!4 &462249930 stripped
@@ -1024,6 +1053,25 @@ MonoBehaviour:
   bulletLifetime: 2
   ID: 2
   flashLightEnabled: 0
+--- !u!95 &462249933
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462249931}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adef55df038706c41b2e18e9b2eb91a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &489923672
 GameObject:
   m_ObjectHideFlags: 0

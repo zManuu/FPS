@@ -24,6 +24,7 @@ public class Gun : MonoBehaviour
     private bool reloading;
     private bool inShootDelay;
     private AudioLib audioLib;
+    private Animator animator;
     private bool inFlashlightDelay;
     private const float flashlightDelayTime = 0.6f;
 
@@ -31,6 +32,7 @@ public class Gun : MonoBehaviour
     {
         currentAmmo = ammunitionCapacity; // Magazin voll beim Start
         audioLib = FindObjectOfType<GameManager>().audioLib;
+        animator = transform.GetComponent<Animator>();
     }
 
     public void Shoot()
@@ -91,6 +93,7 @@ public class Gun : MonoBehaviour
         if (!reloading && currentAmmo < ammunitionCapacity) // Wird ausgeführt, wenn die Waffe nicht voll ist und nicht gerade neu geladen wird
         {
             reloading = true;
+            animator.SetTrigger("StartReload");
             audioLib.PlaySound(ID, "reload");
             Invoke("ClearReload", reloadTime);
         }
